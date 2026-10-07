@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="mini-jira/mini-jira.vcxproj" Id="1a46a472-c889-4362-8caf-592d5950c54b" />
+</Solution>
