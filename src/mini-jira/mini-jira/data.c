@@ -3,21 +3,26 @@
 #include <string.h>
 #include <time.h>
 
+// Global board data structure instance
 BoardData g_data;
 
+// Helper function to get the current local system time as a formatted string
 static void GetCurrentTimeString(char* buffer, size_t size) {
     time_t rawtime;
     struct tm timeinfo;
     time(&rawtime);
 
+    // Safely format the local time into hours, minutes, and seconds
     if (localtime_s(&timeinfo, &rawtime) == 0) {
         strftime(buffer, size, "%H:%M:%S", &timeinfo);
     }
     else {
+        // Fallback default time string if formatting fails
         snprintf(buffer, size, "00:00:00");
     }
 }
 
+// Appends a new message to the activity log history buffer, shifting older entries if full
 void Data_LogActivity(const char* message) {
     if (g_data.log_count >= LOG_HISTORY_SIZE) {
         for (int i = 0; i < LOG_HISTORY_SIZE - 1; i++) {
@@ -30,6 +35,7 @@ void Data_LogActivity(const char* message) {
     GetCurrentTimeString(log->timestamp, sizeof(log->timestamp));
 }
 
+// Recalculates total story points and progress metrics based on active tasks
 void Data_RecalculateStats(void) {
     g_data.total_sp = 0;
     g_data.done_sp = 0;
@@ -45,6 +51,7 @@ void Data_RecalculateStats(void) {
     }
 }
 
+// Initializes the board data, attempts loading from file, and seeds default tasks if empty
 void Data_Init(void) {
     memset(&g_data, 0, sizeof(BoardData));
     g_data.next_id = 101;
@@ -52,6 +59,7 @@ void Data_Init(void) {
     Data_LoadFromFile("board_data.bin");
 
     if (g_data.task_count == 0) {
+        // Seed default initial tasks if no saved data was found
         Data_AddTask("Setup Raylib Workspace", "Configure C99 MSVC environment", "Alex R.", STATUS_DONE, PRIORITY_HIGH, 3);
         Data_AddTask("Implement CRUD Operations", "Add Create, Edit, and Delete features", "Marina S.", STATUS_IN_PROGRESS, PRIORITY_URGENT, 5);
         Data_AddTask("UI Redesign & Modern Styling", "Apply dark indigo themes and rounded cards", "Marina S.", STATUS_IN_PROGRESS, PRIORITY_HIGH, 8);
@@ -63,6 +71,7 @@ void Data_Init(void) {
     }
 }
 
+// Creates and adds a new task to the board, then logs the activity, updates stats, and saves
 bool Data_AddTask(const char* title, const char* desc, const char* assignee, TaskStatus status, TaskPriority priority, int sp) {
     if (g_data.task_count >= MAX_TASKS) return false;
 
@@ -84,6 +93,7 @@ bool Data_AddTask(const char* title, const char* desc, const char* assignee, Tas
     return true;
 }
 
+// Updates details of an existing active task by its ID
 bool Data_UpdateTask(int task_id, const char* title, const char* desc, const char* assignee, TaskStatus status, TaskPriority priority, int sp) {
     for (int i = 0; i < g_data.task_count; i++) {
         if (g_data.tasks[i].id == task_id && g_data.tasks[i].active) {
@@ -106,6 +116,7 @@ bool Data_UpdateTask(int task_id, const char* title, const char* desc, const cha
     return false;
 }
 
+// Soft deletes a task by setting its active flag to false
 bool Data_DeleteTask(int task_id) {
     for (int i = 0; i < g_data.task_count; i++) {
         if (g_data.tasks[i].id == task_id && g_data.tasks[i].active) {
@@ -122,6 +133,7 @@ bool Data_DeleteTask(int task_id) {
     return false;
 }
 
+// Moves an active task to a new workflow status column
 bool Data_MoveTask(int task_id, TaskStatus new_status) {
     for (int i = 0; i < g_data.task_count; i++) {
         if (g_data.tasks[i].id == task_id && g_data.tasks[i].active) {
@@ -141,6 +153,7 @@ bool Data_MoveTask(int task_id, TaskStatus new_status) {
     return false;
 }
 
+// Serializes and saves the current board state structure to a binary file
 void Data_SaveToFile(const char* filename) {
     FILE* file = fopen(filename, "wb");
     if (!file) return;
@@ -148,6 +161,7 @@ void Data_SaveToFile(const char* filename) {
     fclose(file);
 }
 
+// Deserializes and loads the board state structure from a binary file
 void Data_LoadFromFile(const char* filename) {
     FILE* file = fopen(filename, "rb");
     if (!file) return;
