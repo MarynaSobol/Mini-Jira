@@ -8,7 +8,7 @@ int main(void) {
     const int screenWidth = 1280;
     const int screenHeight = 720;
 
-    InitWindow(screenWidth, screenHeight, "Mini Jira Dashboard - Day 3");
+    InitWindow(screenWidth, screenHeight, "Mini Jira Dashboard");
     SetTargetFPS(60);
 
     // Initialize core subsystems
