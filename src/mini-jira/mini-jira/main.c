@@ -3,32 +3,31 @@
 #include "data.h"
 #include "ui.h"
 
+// Application entry point
 int main(void) {
-    // Screen resolution constants
     const int screenWidth = 1280;
     const int screenHeight = 720;
 
-    // Initialize the window and set the target frame rate
-    InitWindow(screenWidth, screenHeight, "Mini Jira Dashboard - Day 2");
+    InitWindow(screenWidth, screenHeight, "Mini Jira Dashboard - Day 3");
     SetTargetFPS(60);
 
-    // Initialize all core modules
+    // Initialize core subsystems
     Theme_Init();
     Data_Init();
     UI_Init();
 
-    // Main application loop
+    // Main render loop
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(theme.bg_main);
 
-        // Render user interface components
+        // Render UI components
         UI_DrawHeader();
         UI_DrawKanbanBoard();
         EndDrawing();
     }
 
-    // Clean up and close the window
+    // Close window and graphics context
     CloseWindow();
     return 0;
 }
