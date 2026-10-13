@@ -21,9 +21,21 @@
     <ClCompile Include="theme.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="data.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ui.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="theme.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="data.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="ui.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
