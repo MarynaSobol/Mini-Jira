@@ -3,13 +3,13 @@
 
 #include "raylib.h"
 
-// User interface module initialization function prototype
+// Initializes UI subsystem components
 void UI_Init(void);
 
-// Renders the top dashboard header including application title and KPI counters
+// Renders header bar, KPI story points, and "+ New Task" button
 void UI_DrawHeader(void);
 
-// Renders the main Kanban board columns, layout, and task cards
+// Renders Kanban columns, interactive task cards, and modal dialog
 void UI_DrawKanbanBoard(void);
 
-#endif
+#endif // UI_H
