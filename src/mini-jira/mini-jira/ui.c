@@ -86,7 +86,7 @@ static void HandleTextInput(char* buffer, int max_len) {
     }
 }
 
-// Render the task creation/editing modal dialog window
+// Render the task creation & editing modal dialog window
 static void DrawModal(void) {
     Vector2 mousePos = GetMousePosition();
     float screenW = (float)GetScreenWidth();
