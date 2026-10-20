@@ -3,6 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Folder Name="/Элементы решения/" />
+  <Folder Name="/Elements of the solution/" />
   <Project Path="mini-jira/mini-jira.vcxproj" Id="1a46a472-c889-4362-8caf-592d5950c54b" />
 </Solution>
