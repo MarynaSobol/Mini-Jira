@@ -1,12 +1,12 @@
-﻿#include "raylib.h"
+#include "raylib.h"
 #include "theme.h"
 #include "data.h"
 #include "ui.h"
 
 // Application entry point
 int main(void) {
-    const int screenWidth = 1280;
-    const int screenHeight = 720;
+    const int screenWidth = 1850;
+    const int screenHeight = 1050;
 
     InitWindow(screenWidth, screenHeight, "Mini Jira Dashboard");
     SetTargetFPS(60);
